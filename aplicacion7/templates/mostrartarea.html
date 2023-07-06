@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Listado de Tareas</h1>
+
+
+<div class="container">
+    {% for tarea in tareas %}
+    <ul>
+        <li>Nombre: {{ tarea.nombre }}</li>
+        <li>tema: {{ tarea.tema }}</li>
+        <li>fecha: {{ tarea.fecha }}</li>
+    </ul>
+    {% endfor %}
+</div>
+
+{% endblock %}

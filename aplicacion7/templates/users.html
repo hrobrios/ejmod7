@@ -1,0 +1,20 @@
+{% extends 'base.html' %}  <!--CON ESTO SE LLLAMA AL ARCHIVO BASE-->
+
+{% block content %} <!--ESTO SE INCORPORA A LA WEB DESDE VIEWS COMO DATO INCORPORADO-->
+
+<div class="container">
+    <h1 class="h1-usuarios">usuarios activos</h1><!--llama el contenido de style solo para este h1 en caso que otras persatañas tambien tengan otro h1-->
+    <ul>
+        {% for usuario in usuarios %}
+        <li>{{ usuario }}</li>
+        {% endfor %}
+    </ul>
+    {% if otros|length > 0 %} {% for otro in otros %}
+    <p>{{ otro }}</p>
+    {% endfor %} {% else %}
+    <p>No existen mas usuarios</p>
+    {% endif %}
+</div>
+
+{% endblock  %}
+
