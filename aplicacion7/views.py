@@ -3,14 +3,21 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import UserRegistrationForm
-from .forms import UsuarioForm, TareaForm
-from .models import Usuario, Tarea
+from .forms import UsuarioForm, TareaForm, PacienteForm
+from .models import Usuario, Tarea, Paciente
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 # Create your views here.
 
 
 def inicio(request):
     return render(request, "home.html")
+
+def acceso(request):
+    return render(request, "acceso.html")
+
+def ficha1(request):
+    return render(request,"paciente_1.html")
+
 
 @login_required
 def register_user(request):#el request es todo lo que traemos desde hmtl
@@ -24,7 +31,7 @@ def register_user(request):#el request es todo lo que traemos desde hmtl
             user.groups.add(group)
             user.user_permissions.set(permissions)
             messages.success(request, f'Usuario {username} creado exitosamente!!')
-            return redirect('home')
+            return redirect('acceso')
     else: #si no hago post, devolverá al formulario register user
         form = UserRegistrationForm()
     
@@ -63,13 +70,16 @@ def crear_usuario(request):
             usuario.save()
         else:
             print("Datos invalidos")
-        return redirect('/home')
+        return redirect('/acceso')
     
     context = {
         'form': form
     }
 
     return render(request, 'formulariouser.html', context=context)
+
+
+
 
 
 @login_required
@@ -100,3 +110,36 @@ def mostrartarea(request):
     context = {'tareas': datos}
 
     return render(request, 'mostrartarea.html', context=context)
+
+
+
+@login_required
+def pacientes(request):
+    form =PacienteForm()
+
+    if request.method == "POST":
+        form = PacienteForm(request.POST)
+        if form.is_valid():
+            print(form)
+            paciente = Paciente()
+            paciente.nombre = form.cleaned_data['nombre']
+            paciente.apellido = form.cleaned_data["apellido"]
+            paciente.prevision = form.cleaned_data['prevision']
+            paciente.save()
+        else:
+            print("Datos invalidos")
+        return redirect('/pacientes')
+    context = {'form': form}
+
+    return render(request, 'pacientes.html', context=context)
+
+
+
+@login_required
+def mostrarpaciente(request):
+
+    datos = Paciente.objects.all()
+    
+    context = {'pacientes': datos}
+
+    return render(request, 'mostrarpaciente.html', context=context)

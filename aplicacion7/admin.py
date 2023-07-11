@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuario
+from .models import Usuario, Tarea
 from django.contrib.auth.models import User
 
 # Register your models here.
@@ -11,3 +11,4 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+admin.site.register(Tarea)

@@ -13,37 +13,40 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <title>Prueba</title>
+    <title>CLINICA ANDES SALUD</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <div class="container-fluid">       
+        
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
+          <ul class="nav justify-content-end">
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              <a class="nav-link active" href="{% url 'acceso' %}">acceso médicos</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users' %}">Médicos Autorizados</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'pacientes' %}">ingresar pacientes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'users' %}">Usuarios vigentes</a>
+              <a class="nav-link" href="{% url 'mostrarpaciente' %}"> Ver Pacientes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'formulariouser' %}">crear usuario</a>
+              <a class="nav-link" href="{% url 'ficha1' %}"> Ver ficha</a>
+            </li>
+
+
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'tareas' %}">Ingresar Comentarios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'tareas' %}">Ingresar Tareas</a>
+              <a class="nav-link" href="{% url 'mostrartarea' %}">Ver Comentarios</a>
             </li>
 
             <li class="nav-item">
@@ -51,7 +54,7 @@
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link" href="{% url 'login' %}"><h1>ACCESO A MÉDICOS</h1></a>
               </li>
             {% endif %}
             </li>

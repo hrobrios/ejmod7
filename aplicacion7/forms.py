@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group, Permission #con esto se trae user segun lo creado class meta que tiene user
-from .models import Tarea
+from .models import Tarea, Paciente
 
 class UserRegistrationForm(UserCreationForm):# hereda de usercreationform y se trae este formato arriba from django....
     email = forms.EmailField()
@@ -22,7 +22,12 @@ class UserRegistrationForm(UserCreationForm):# hereda de usercreationform y se t
 class UsuarioForm(forms.Form):#clase que trae todas la validaciones Form y que deben ponerse todos los campos como formulario nuevo a diferencia de class escuela abajo
     nombre = forms.CharField(max_length=100)
     apellido = forms.CharField(max_length=100)
-    
+
+class PacienteForm(forms.ModelForm):#model form. trae su propio modelo, ver models.py
+    class Meta:
+        model = Paciente
+        fields = '__all__' 
+
 
 class TareaForm(forms.ModelForm):#model form. trae su propio modelo, ver models.py
     class Meta:
